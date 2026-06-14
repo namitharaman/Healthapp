@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Appointment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #e6f7ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(128, 128, 128, 0.5);
+            text-align: center;
+            width: 320px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid gray;
+            box-sizing: border-box; 
+        }
+
+        button {
+            background: teal;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px 5px 5px 5px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #006666;
+        }
+
+        #msg {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Book Appointment</h2>
+    
+    <input type="text" id="name" placeholder="Enter Name"><br>
+    <input type="number" id="age" placeholder="Enter Age"><br>
+    <input type="text" id="disease" placeholder="Enter Disease"><br>
+    <input type="date" id="date"><br>
+
+    <button onclick="book()">Submit</button>
+    <button onclick="goDashboard()">Back To Dashboard</button>
+
+    <p id="msg"></p>
+</div>
+
+<script> 
+
+function book() {
+    let name = document.getElementById("name").value.trim();
+    let age = document.getElementById("age").value.trim();
+    let disease = document.getElementById("disease").value.trim();
+    let date = document.getElementById("date").value;
+    let msgElement = document.getElementById("msg");
+
+    // 1. Basic Validation Check
+    if (!name || !age || !disease || !date) {
+        msgElement.style.color = "red";
+        msgElement.innerText = "Please fill out all fields.";
+        return; 
+    }
+
+    msgElement.style.color = "orange";
+    msgElement.innerText = "Saving appointment...";
+
+    // 2. Fetch API Call
+    fetch("http://localhost:5000/appointments", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name: name,
+            age: parseInt(age), // Converts age string to a clean number for your backend
+            disease: disease,
+            date: new Date(date) // Converts date string to a Date object for your backend
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Server response was not ok");
+        }
+        return response.json();
+    })
+    .then(data => {
+        // UI Updates on success
+        msgElement.style.color = "green";
+        msgElement.innerText = "Appointment Saved Successfully!";
+        
+        // Optional: Clear form inputs after saving
+        document.getElementById("name").value = "";
+        document.getElementById("age").value = "";
+        document.getElementById("disease").value = "";
+        document.getElementById("date").value = "";
+        
+        console.log("Success:", data);
+    })
+    .catch(error => {
+        console.error("Error details:", error);
+        msgElement.style.color = "red";
+        msgElement.innerText = "Failed to save appointment. Please try again.";
+    });
+}
+
+// 3. Added the missing redirect function
+function goDashboard() {
+    // Replace "dashboard.html" with your actual dashboard file path or URL
+    window.location.href = "dashboard.html"; 
+}
+
+</script>
+</body>
+</html>

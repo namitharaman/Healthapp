@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>BMI Calculator</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#e6f7ff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+/* CARD */
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 0 15px gray;
+    text-align:center;
+    width:320px;
+    animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+h2{
+    color:teal;
+    margin-bottom:10px;
+}
+
+p{
+    color:gray;
+    margin-bottom:20px;
+}
+
+/* INPUT */
+
+input{
+    width:90%;
+    padding:10px;
+    margin:10px;
+    border-radius:8px;
+    border:1px solid gray;
+    transition:0.3s;
+}
+
+input:focus{
+    border-color:teal;
+    box-shadow:0 0 8px lightblue;
+    outline:none;
+}
+
+/* BUTTON */
+
+button{
+    background:teal;
+    color:white;
+    padding:10px 20px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    transition:0.3s;
+    margin-top:10px;
+}
+
+button:hover{
+    background:#006666;
+    transform:scale(1.05);
+}
+
+/* RESULT */
+
+.result{
+    margin-top:20px;
+    padding:15px;
+    background:#f0ffff;
+    border-radius:10px;
+    display:none;
+    animation:pop 0.5s ease;
+}
+
+@keyframes pop{
+
+    from{
+        transform:scale(0.5);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>BMI Calculator</h2>
+
+<p>
+Check Your Body Mass Index
+</p>
+
+<input type="number"
+id="weight"
+placeholder="Enter Weight in KG"><br>
+
+<input type="number"
+id="height"
+placeholder="Enter Height in Meters"><br>
+
+<button onclick="calculateBMI()">
+Calculate BMI
+</button>
+
+<button onclick="goDashboard()">
+Back To Dashboard
+</button>
+
+<div class="result" id="resultBox">
+
+<h3 id="bmi"></h3>
+
+<h3 id="status"></h3>
+
+</div>
+
+</div>
+
+<script>
+
+function calculateBMI(){
+
+let weight =
+document.getElementById("weight").value;
+
+let height =
+document.getElementById("height").value;
+
+if(weight == "" || height == ""){
+
+    alert("Please enter all fields");
+    return;
+}
+
+let bmi =
+weight / (height * height);
+
+bmi = bmi.toFixed(2);
+
+let message = "";
+
+if(bmi < 18.5){
+
+    message = "Underweight";
+}
+
+else if(bmi >= 18.5 && bmi < 25){
+
+    message = "Normal Weight";
+}
+
+else if(bmi >= 25 && bmi < 30){
+
+    message = "Overweight";
+}
+
+else{
+
+    message = "Obese";
+}
+
+document.getElementById("resultBox")
+.style.display = "block";
+
+document.getElementById("bmi")
+.innerHTML =
+"Your BMI : " + bmi;
+
+document.getElementById("status")
+.innerHTML =
+"Status : " + message;
+
+}
+
+function goDashboard(){
+
+window.location.href = "dashboard.html";
+
+}
+
+</script>
+
+</body>
+</html>

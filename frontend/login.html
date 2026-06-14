@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Healthcare Login</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial;
+    background:linear-gradient(to right,#00b4db,#0083b0);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.card{
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 0 20px rgba(0,0,0,0.2);
+    text-align:center;
+    animation:fade 1s ease-in-out;
+}
+
+input{
+    width:250px;
+    padding:12px;
+    margin:10px;
+    border-radius:10px;
+    border:1px solid gray;
+}
+
+button{
+    padding:12px 25px;
+    background:teal;
+    color:white;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#006666;
+    transform:scale(1.05);
+}
+
+#msg{
+    margin-top:15px;
+    font-weight:bold;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(-20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>🏥 Healthcare Login</h2>
+
+<input id="user" placeholder="Username"><br>
+
+<input id="pass" type="password" placeholder="Password"><br>
+
+<button onclick="login()">Login</button>
+
+<p id="msg"></p>
+
+</div>
+
+<script>
+
+function login(){
+
+    let username =
+    document.getElementById("user").value;
+
+    let password =
+    document.getElementById("pass").value;
+
+    if(username === "admin" && password === "1234"){
+
+        document.getElementById("msg").innerHTML =
+        "Login Successful ✅";
+
+        window.location.href = "role.html";
+
+    }
+    else{
+
+        document.getElementById("msg").innerHTML =
+        "Invalid Username or Password ❌";
+
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
+

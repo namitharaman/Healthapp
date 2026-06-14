@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Contact Doctors</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    background:#eef7ff;
+    padding:30px;
+}
+
+/* Heading */
+
+h1{
+    text-align:center;
+    color:#0077b6;
+    margin-bottom:40px;
+}
+
+/* Cards */
+
+.container{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+/* Doctor Card */
+
+.card{
+
+    background:white;
+    padding:25px;
+    border-radius:20px;
+
+    box-shadow:0 8px 20px
+    rgba(0,0,0,0.1);
+
+    transition:0.4s;
+    position:relative;
+    overflow:hidden;
+}
+
+.card:hover{
+
+    transform:translateY(-10px)
+    scale(1.03);
+
+}
+
+/* Circle Animation */
+
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    background:#90e0ef;
+
+    border-radius:50%;
+
+    top:-80px;
+    right:-80px;
+
+    opacity:0.4;
+}
+
+/* Icon */
+
+.icon{
+
+    font-size:50px;
+    color:#0077b6;
+    margin-bottom:15px;
+}
+
+h2{
+    color:#333;
+    margin-bottom:10px;
+}
+
+p{
+    color:gray;
+    margin-bottom:8px;
+}
+
+/* Textarea */
+
+textarea{
+
+    width:100%;
+    height:80px;
+
+    margin-top:10px;
+
+    border-radius:10px;
+
+    border:1px solid #ccc;
+
+    padding:10px;
+
+    resize:none;
+}
+
+/* Button */
+
+button{
+
+    margin-top:15px;
+
+    width:100%;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#0077b6;
+
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+button:hover{
+
+    background:#023e8a;
+
+}
+
+/* Notification */
+
+.notification{
+
+    position:fixed;
+
+    top:20px;
+    right:-300px;
+
+    background:#2ecc71;
+
+    color:white;
+
+    padding:15px 25px;
+
+    border-radius:10px;
+
+    transition:0.5s;
+
+    z-index:1000;
+}
+
+.notification.show{
+
+    right:20px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Contact Specialists</h1>
+
+<div class="container">
+
+<!-- Neurologist -->
+
+<div class="card">
+
+<div class="icon">
+<i class="fa-solid fa-brain"></i>
+</div>
+
+<h2>Neurologist</h2>
+
+<p>Dr. Sharma</p>
+
+<p>📞 +91 9876543210</p>
+
+<p>✉ neuro@health.com</p>
+
+<textarea id="msg1"
+placeholder="Enter your message"></textarea>
+
+<button
+onclick="sendMessage(
+'Neurologist',
+'Dr. Sharma',
+'msg1'
+)">
+Send Message
+</button>
+
+</div>
+
+<!-- Cardiologist -->
+
+<div class="card">
+
+<div class="icon">
+<i class="fa-solid fa-heart-pulse"></i>
+</div>
+
+<h2>Cardiologist</h2>
+
+<p>Dr. Mehta</p>
+
+<p>📞 +91 9876501234</p>
+
+<p>✉ cardio@health.com</p>
+
+<textarea id="msg2"
+placeholder="Enter your message"></textarea>
+
+<button
+onclick="sendMessage(
+'Cardiologist',
+'Dr. Mehta',
+'msg2'
+)">
+Send Message
+</button>
+
+</div>
+
+<!-- Orthopedic -->
+
+<div class="card">
+
+<div class="icon">
+<i class="fa-solid fa-bone"></i>
+</div>
+
+<h2>Orthopedic</h2>
+
+<p>Dr. Rao</p>
+
+<p>📞 +91 9123456780</p>
+
+<p>✉ ortho@health.com</p>
+
+<textarea id="msg3"
+placeholder="Enter your message"></textarea>
+
+<button
+onclick="sendMessage(
+'Orthopedic',
+'Dr. Rao',
+'msg3'
+)">
+Send Message
+</button>
+
+</div>
+
+</div>
+
+<!-- Notification -->
+
+<div class="notification"
+id="notification">
+
+Message Sent Successfully
+
+</div>
+
+<script>
+
+/* Send Message */
+
+async function sendMessage(
+doctorType,
+doctorName,
+msgId
+){
+
+    const message =
+    document.getElementById(msgId).value;
+
+    if(message === ""){
+
+        alert("Please Enter Message");
+
+        return;
+    }
+
+    const data = {
+
+        patientName:"Patient",
+
+        doctorType:doctorType,
+
+        doctorName:doctorName,
+
+        message:message
+    };
+
+    await fetch(
+    "http://localhost:5000/contactDoctor",
+    {
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify(data)
+
+    });
+
+    showNotification();
+
+    document.getElementById(msgId).value="";
+}
+
+/* Notification */
+
+function showNotification(){
+
+    const notification =
+    document.getElementById("notification");
+
+    notification.classList.add("show");
+
+    setTimeout(()=>{
+
+        notification.classList.remove("show");
+
+    },3000);
+}
+
+</script>
+
+</body>
+</html>

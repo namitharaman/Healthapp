@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Doctor Dashboard</title>
+
+    <style>
+
+        body{
+            font-family:Arial;
+            margin:0;
+            background:#f1f9ff;
+        }
+
+        .header{
+            background:#0077b6;
+            color:white;
+            padding:20px;
+            text-align:center;
+            font-size:28px;
+            font-weight:bold;
+        }
+
+        .container{
+            padding:30px;
+        }
+
+        .card{
+            background:white;
+            padding:20px;
+            border-radius:12px;
+            box-shadow:0 0 10px gray;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:20px;
+        }
+
+        th{
+            background:#0077b6;
+            color:white;
+            padding:12px;
+        }
+
+        td{
+            padding:12px;
+            text-align:center;
+            border-bottom:1px solid #ccc;
+        }
+
+        button{
+            padding:8px 15px;
+            border:none;
+            border-radius:6px;
+            cursor:pointer;
+            color:white;
+            font-weight:bold;
+        }
+
+        .accept{
+            background:green;
+        }
+
+        .reject{
+            background:red;
+        }
+
+        .prescription{
+            background:#ff9800;
+        }
+
+        textarea{
+            width:90%;
+            height:60px;
+            margin-top:5px;
+            border-radius:6px;
+            padding:8px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        Doctor Dashboard
+    </div>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h2>Patient Appointments</h2>
+
+            <table>
+
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Age</th>
+                    <th>Disease</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Prescription</th>
+                    <th>Action</th>
+                </tr>
+
+                <tr>
+                    <td>Ravi</td>
+                    <td>22</td>
+                    <td>Fever</td>
+                    <td>24-05-2026</td>
+
+                    <td id="status1">Pending</td>
+
+                    <td>
+                        <textarea id="pres1"
+                        placeholder="Write medicine here"></textarea>
+                    </td>
+
+                    <td>
+
+                        <button class="accept"
+                        onclick="acceptAppointment('status1')">
+                            Accept
+                        </button>
+
+                        <button class="reject"
+                        onclick="rejectAppointment('status1')">
+                            Reject
+                        </button>
+
+                        <br><br>
+
+                        <button class="prescription"
+                        onclick="savePrescription('pres1')">
+                            Save
+                        </button>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Priya</td>
+                    <td>30</td>
+                    <td>Cold</td>
+                    <td>25-05-2026</td>
+
+                    <td id="status2">Pending</td>
+
+                    <td>
+                        <textarea id="pres2"
+                        placeholder="Write medicine here"></textarea>
+                    </td>
+
+                    <td>
+
+                        <button class="accept"
+                        onclick="acceptAppointment('status2')">
+                            Accept
+                        </button>
+
+                        <button class="reject"
+                        onclick="rejectAppointment('status2')">
+                            Reject
+                        </button>
+
+                        <br><br>
+
+                        <button class="prescription"
+                        onclick="savePrescription('pres2')">
+                            Save
+                        </button>
+
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function acceptAppointment(id){
+            document.getElementById(id).innerHTML = "Accepted";
+        }
+
+        function rejectAppointment(id){
+            document.getElementById(id).innerHTML = "Rejected";
+        }
+
+        function savePrescription(id){
+
+            let prescription =
+            document.getElementById(id).value;
+
+            alert("Prescription Saved : " + prescription);
+        }
+
+    </script>
+
+</body>
+</html>

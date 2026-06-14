@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Emergency</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial;
+    background:linear-gradient(to right,#ffcccc,#ffe6e6);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    width:400px;
+    text-align:center;
+    box-shadow:0 0 20px rgba(0,0,0,0.3);
+    animation:fade 1s ease-in-out;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:scale(0.8);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+h2{
+    color:red;
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+    50%{
+        opacity:0.5;
+    }
+}
+
+button{
+    padding:12px 25px;
+    background:red;
+    color:white;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:18px;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.1);
+    background:darkred;
+}
+
+.tip{
+    margin-top:20px;
+    background:#fff0f0;
+    padding:10px;
+    border-radius:10px;
+}
+
+#msg{
+    margin-top:20px;
+    color:red;
+    font-weight:bold;
+    font-size:18px;
+}
+
+.back{
+    margin-top:15px;
+    background:teal;
+}
+
+.back:hover{
+    background:#006666;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>🚑 Emergency Help</h2>
+
+<button onclick="callEmergency()">
+Call 108
+</button>
+
+<p id="msg"></p>
+
+<div class="tip">
+⚠ Stay calm during emergencies and contact nearby hospital immediately.
+</div>
+
+<div class="tip">
+🩹 Keep first aid kit available at home.
+</div>
+
+<button class="back"
+onclick="location.href='dashboard.html'">
+Back
+</button>
+
+</div>
+
+<script>
+
+function callEmergency(){
+
+document.getElementById("msg").innerHTML =
+"📞 Calling Emergency Number 108...";
+
+}
+
+
+</script>
+
+</body>
+</html>

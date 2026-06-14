@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Healthcare Dashboard</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial;
+    background:linear-gradient(to right,#00b4db,#0083b0);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    text-align:center;
+}
+
+h1{
+    color:white;
+    margin-bottom:40px;
+    animation:fade 1s ease-in-out;
+}
+
+.card-container{
+    display:flex;
+    gap:30px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.card{
+    background:white;
+    width:220px;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 0 15px rgba(0,0,0,0.2);
+    transition:0.3s;
+    cursor:pointer;
+}
+
+.card:hover{
+    transform:translateY(-10px) scale(1.05);
+}
+
+.card h2{
+    color:teal;
+}
+
+.card p{
+    color:gray;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 20px;
+    background:teal;
+    color:white;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#006666;
+}
+
+@keyframes fade{
+
+    from{
+        opacity:0;
+        transform:translateY(-20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🏥 Welcome to Healthcare Dashboard</h1>
+
+<div class="card-container">
+
+    <!-- general medicine -->
+
+    <div class="card">
+
+        <h2>⚖ General medicine</h2>
+
+        <p>
+            Minor health issues.
+        </p>
+
+        <button onclick="location.href='doctor.html'">
+
+            Open
+
+        </button>
+
+    </div>
+
+    <!-- specialists -->
+
+    <div class="card">
+
+        <h2>📅 Specialists</h2>
+
+        <p>
+             Callyour doctor appointment easily.
+        </p>
+
+        <button onclick="location.href='contactdoctor.html'">
+
+            Open
+
+        </button>
+
+    </div>
+
+    <!-- EMERGENCY CARD -->
+
+    <div class="card">
+
+        <h2>🚑 Emergency</h2>
+
+        <p>
+            Quick emergency help & contact.
+        </p>
+
+        <button onclick="location.href='emergency.html'">
+
+            Open
+
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+</body>
+</html>
